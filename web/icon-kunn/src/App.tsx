@@ -4,23 +4,27 @@ import logo from './img/image_FILL0_wght400_GRAD0_opsz48.svg';
 
 function App() {
 
-  const path = 'http://localhost:8080';
+  const path = 'https://into-the-program.com/wp-json/wp/v2/posts/6129';
 
   const [state, setState] = useState("");
 
   useEffect(() => {
     const get = async () => {
-        const response = await fetch(path + '/get', {method: 'GET', mode: 'no-cors'})
+        await fetch(path, 
+          {mode: 'no-cors', method: 'GET'})
         .then(r => r.json())
         .then(data => {
+          console.log('then');
+          console.log(data);
           setState(data.Body)
         })
         .catch(e => {
-          alert(e);
+          console.log('catch');
+          console.log(e);
         });
     };
     get();
-}, []);
+  }, []);
 
 
   return (
