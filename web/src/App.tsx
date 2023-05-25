@@ -4,7 +4,7 @@ import logo from './img/image_FILL0_wght400_GRAD0_opsz48.svg';
 
 function App() {
 
-  const path = 'https://into-the-program.com/wp-json/wp/v2/posts/6129';
+  const path = 'https://localhost:8080/get';
 
   const [state, setState] = useState("");
 
