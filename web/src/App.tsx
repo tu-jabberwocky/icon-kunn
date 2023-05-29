@@ -5,14 +5,13 @@ import logo from './img/image_FILL0_wght400_GRAD0_opsz48.svg';
 function App() {
 
   // const path = 'https://weather.tsukumijima.net/api/forecast/city/400040';
-  const path = 'https://localhost:8080/get';
+  const path = 'https://localhost:7265/get';
 
   const [state, setState] = useState("");
 
   useEffect(() => {
     const get = async () => {
-        await fetch(path, 
-          {mode: 'no-cors', method: 'GET'})
+        await fetch(path)
           .then(r => r.json())
           .then(data => {
             console.log('then');
