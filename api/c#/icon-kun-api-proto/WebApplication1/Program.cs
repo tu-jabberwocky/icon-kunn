@@ -25,8 +25,9 @@ app.MapControllers();
 app.MapGet("/get", async context =>
 {
     //string param = (string)context.GetRouteValue()
-    await context.Response.WriteAsync("hello world");
-
+    var response = new ResponseModel();
+    response.value = "test";
+    await context.Response.WriteAsJsonAsync(response);
 });
 
 app.Run();
