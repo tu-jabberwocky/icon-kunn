@@ -1,2 +1,7 @@
 ﻿*.vscode
 *.exe
+api/c#/icon-kun-api-proto/.vs/icon-kun-api-proto/DesignTimeBuild/.dtbcache.v2
+api/c#/icon-kun-api-proto/.vs
+api/c#/icon-kun-api-proto/WebApplication1/bin
+api/c#/icon-kun-api-proto/WebApplication1/obj
+api/c#/icon-kun-api-proto/WebApplication1/Properties/launchSettings.json
