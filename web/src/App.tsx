@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import logo from './img/image_FILL0_wght400_GRAD0_opsz48.svg';
 
 function App() {
 
@@ -14,9 +13,7 @@ function App() {
         await fetch(path)
           .then(r => r.json())
           .then(data => {
-            console.log('then');
-            console.log(data);
-            setState(data);
+            setState(data.value);
         })
         .catch(e => {
           console.log('catch');
@@ -29,12 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="logo" />
-        <p>
-          {state.toString()}
-        </p>
-      </header>
+      {state.toString()}
     </div>
   );
 }
