@@ -26,12 +26,7 @@ app.UseCors("CorsPolicy");
 
 app.MapControllers();
 
-app.MapGet("/get", async context =>
-{
-    //string param = (string)context.GetRouteValue()
-    var response = new ResponseModel();
-    response.value = "test";
-    await context.Response.WriteAsJsonAsync(response);
-});
+// Mappng
+app.SetMap();
 
 app.Run();
