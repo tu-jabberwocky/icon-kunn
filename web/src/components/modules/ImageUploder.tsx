@@ -4,7 +4,6 @@ import Canvas from './Canvas';
 
 function ImageUploder() {
     const [imageData, setImageData] = useState('');
-    const rectAngle = { startY:0, startX:0, endY:0, endX:0 };
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const files = e.target.files
@@ -21,17 +20,6 @@ function ImageUploder() {
         } else {
             setImageData('');
         }
-    }
-
-    function handleMouseDown(e: React.MouseEvent) {
-        rectAngle.startX = e.clientX;
-        rectAngle.startY = e.clientY;
-        // isDraw = true;
-    }
-
-    function handleMouseUp(e :React.MouseEvent) {
-        rectAngle.endX = e.clientX;
-        rectAngle.endY = e.clientX;
     }
 
     let preview = null;
