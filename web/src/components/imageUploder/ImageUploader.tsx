@@ -3,6 +3,7 @@ import './imageUploader.css';
 import React, { useRef, useState } from 'react';
 
 import RectCoordinate from '../../types/RectCoordinate';
+import Canvas from '../imageUploder/canvas/Canvas';
 
 const ImageUploader: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -73,17 +74,7 @@ const ImageUploader: React.FC = () => {
             onMouseMove={handleImageMouseMove}
             onMouseUp={handleImageMouseUp}
           />
-          {coordinate && (
-            <div
-              className="selection-overlay"
-              style={{
-                top: coordinate.y,
-                left: coordinate.x,
-                width: coordinate.width,
-                height: coordinate.height,
-              }}
-            />
-          )}
+          {coordinate && <Canvas coordinate={coordinate} />}
         </div>
       )}
     </div>

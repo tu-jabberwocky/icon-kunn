@@ -1,10 +1,8 @@
-.canvas-container {
-    position: relative;
-    display: inline-block;
-    cursor: default;
-  }
 
-.canvas.dragging {
-    cursor: grabbing;
-  }
+.selection-overlay {
+  position: absolute;
+  border: 2px dotted  black;
+  background-color: rgba(0, 0, 0, 0.3);;
+  pointer-events: none;
+}
   
