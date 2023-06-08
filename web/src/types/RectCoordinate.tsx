@@ -1,8 +1,8 @@
-interface RectCoordinates {
+interface RectCoordinate {
     x: number;
     y: number;
     width: number;
     height: number;
   }
   
-  export default RectCoordinates;
+  export default RectCoordinate;

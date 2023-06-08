@@ -1,20 +1,14 @@
 import './imageUploader.css';
 
-import React, { useRef,useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-interface Coordinate {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
+import RectCoordinate from '../../types/RectCoordinate';
 
 const ImageUploader: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [coordinate, setCoordinate] = useState<Coordinate | null>(null);
+  const [coordinate, setCoordinate] = useState<RectCoordinate | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
   const startPositionRef = useRef({ x: 0, y: 0 });
   const isSelectingRef = useRef(false);
 
@@ -80,27 +74,15 @@ const ImageUploader: React.FC = () => {
             onMouseUp={handleImageMouseUp}
           />
           {coordinate && (
-            <>
-              <div
-                className="selection-overlay"
-                style={{
-                  top: coordinate.y,
-                  left: coordinate.x,
-                  width: coordinate.width,
-                  height: coordinate.height,
-                }}
-              />
-              <div
-                className="overlay"
-                ref={overlayRef}
-                style={{
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-              />
-            </>
+            <div
+              className="selection-overlay"
+              style={{
+                top: coordinate.y,
+                left: coordinate.x,
+                width: coordinate.width,
+                height: coordinate.height,
+              }}
+            />
           )}
         </div>
       )}
@@ -108,4 +90,4 @@ const ImageUploader: React.FC = () => {
   );
 };
 
-export default ImageUploader
+export default ImageUploader;

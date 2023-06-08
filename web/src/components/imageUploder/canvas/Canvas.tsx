@@ -2,11 +2,11 @@ import './canvas.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import RectCoordinates from '../../types/RectCoordinates';
+import RectCoordinate from '../../../types/RectCoordinate';
 
 interface CanvasProps {
   selectedImage: string | null;
-  rectCoordinates: RectCoordinates | null;
+  rectCoordinates: RectCoordinate | null;
   onRectSelection: (x: number, y: number) => void;
 }
 
