@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
-import Header from './components/modules/Header'
+import Header from './components/Header/Header'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(

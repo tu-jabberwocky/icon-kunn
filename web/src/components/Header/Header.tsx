@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '../../img/image_FILL0_wght400_GRAD0_opsz48.svg';
+import logo from './image/image_FILL0_wght400_GRAD0_opsz48.svg'
 
 function Header() {
     return (

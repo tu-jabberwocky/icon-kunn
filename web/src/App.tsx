@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-import ImageUploder from './components/modules/ImageUploder';
+import ImageUploader from './components/imageUploder/ImageUploader';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       {state.toString()}
-      <ImageUploder />
+      <ImageUploader />
     </div>
   );
 }
