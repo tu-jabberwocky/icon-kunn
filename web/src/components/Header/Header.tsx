@@ -4,18 +4,21 @@ import logo from './image/image_FILL0_wght400_GRAD0_opsz48.svg'
 
 function Header() {
     return (
-        <nav className='navbaer'>
-            <div className='navbar-brand'>
-            <div className='navbar-item columns'>
-                        <div className='column'>
+        <header>
+            <section className='hero is-info'>
+                <div className='hero-body columns'>
+                    <div className='column is-2'>
+                        <a className='nabvar-item' href=''>
                             <img src={logo} alt="logo" />
-                        </div>
-                        <div className='column is-four-fifths'>
-                            <h1>icon-kunn</h1>
-                        </div>
+                        </a>
                     </div>
-            </div>
-        </nav>
+                    <div className='colmns'>
+                        <h1 className='title'>icon-kunn</h1>
+                        <h1 className='sybtitle'>画像からアイコンを生成します。</h1>
+                    </div>
+                </div>
+            </section>
+        </header>
     );
 }
 
