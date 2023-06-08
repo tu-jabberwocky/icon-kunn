@@ -1,5 +1,7 @@
 import './imageUploader.css';
 
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef, useState } from 'react';
 
 import RectCoordinate from '../../types/RectCoordinate';
@@ -62,8 +64,23 @@ const ImageUploader: React.FC = () => {
 
   return (
     <div>
-      <label htmlFor="image-upload">Select Image:</label>
-      <input type="file" id="image-upload" accept="image/*" onChange={handleImageChange} />
+      <div className="file is-info">
+        <label className="file-label">
+        <input className='file-input'
+               type="file"
+               id="image-upload"
+               accept="image/*"
+               onChange={handleImageChange} />
+        <span className="file-cta">
+          <span className="file-icon">
+            <FontAwesomeIcon icon={faUpload} />
+          </span>
+          <span className="file-label">
+              Select File...
+          </span>
+        </span>
+        </label>
+      </div>
       {previewUrl && (
         <div className="image-container">
           <img
