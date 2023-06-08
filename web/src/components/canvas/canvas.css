@@ -1,0 +1,10 @@
+.canvas-container {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+  }
+
+.canvas.dragging {
+    cursor: grabbing;
+  }
+  

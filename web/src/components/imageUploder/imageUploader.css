@@ -1,0 +1,13 @@
+img {
+  -webkit-user-drag: none;
+}
+
+.image-container {
+  position: relative;
+}
+
+.selection-overlay {
+  position: absolute;
+  border: 2px dashed red;
+  pointer-events: none;
+}
