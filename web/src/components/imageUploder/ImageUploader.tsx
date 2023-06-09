@@ -7,7 +7,32 @@ import React, { useRef, useState } from 'react';
 import RectCoordinate from '../../types/RectCoordinate';
 import Canvas from '../imageUploder/canvas/Canvas';
 
-const ImageUploader: React.FC = () => {
+interface CoordinateInfoProps {
+  coordinate: RectCoordinate;
+  onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
+}
+
+const CoordinateInfo: React.FC<CoordinateInfoProps> = ({ coordinate, onCoordinatesUpdated }) => {
+  const handleClick = () => {
+    onCoordinatesUpdated(coordinate);
+  };
+
+  return (
+    <div className="coordinate-info">
+      <span>Left: {coordinate.x}</span>
+      <span>Top: {coordinate.y}</span>
+      <span>Width: {coordinate.width}</span>
+      <span>Height: {coordinate.height}</span>
+      <button onClick={handleClick}>Copy Coordinates</button>
+    </div>
+  );
+};
+
+interface ImageUploaderProps {
+  onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
+}
+
+const ImageUploader: React.FC<ImageUploaderProps> = ({ onCoordinatesUpdated }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [coordinate, setCoordinate] = useState<RectCoordinate | null>(null);
@@ -62,23 +87,27 @@ const ImageUploader: React.FC = () => {
     isSelectingRef.current = false;
   };
 
+  const handleCoordinatesUpdated = (coordinate: RectCoordinate) => {
+    onCoordinatesUpdated(coordinate);
+  };
+
   return (
     <div>
       <div className="file is-info">
         <label className="file-label">
-        <input className='file-input'
-               type="file"
-               id="image-upload"
-               accept="image/*"
-               onChange={handleImageChange} />
-        <span className="file-cta">
-          <span className="file-icon">
-            <FontAwesomeIcon icon={faUpload} />
+          <input
+            className="file-input"
+            type="file"
+            id="image-upload"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          <span className="file-cta">
+            <span className="file-icon">
+              <FontAwesomeIcon icon={faUpload} />
+            </span>
+            <span className="file-label">Select File...</span>
           </span>
-          <span className="file-label">
-              Select File...
-          </span>
-        </span>
         </label>
       </div>
       {previewUrl && (
@@ -91,14 +120,9 @@ const ImageUploader: React.FC = () => {
             onMouseMove={handleImageMouseMove}
             onMouseUp={handleImageMouseUp}
           />
-          {coordinate && <Canvas coordinate={coordinate} />}
-          {coordinate && 
-            <div className='coordinate-info'>
-              <span>Left: {coordinate.x}</span>
-              <span>Top: {coordinate.y}</span>
-              <span>Width: {coordinate.width}</span>
-              <span>Height: {coordinate.height}</span>
-            </div>}
+          {coordinate && (
+            <CoordinateInfo coordinate={coordinate} onCoordinatesUpdated={handleCoordinatesUpdated} />
+          )}
         </div>
       )}
     </div>

@@ -1,7 +1,8 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import ImageUploader from './components/imageUploder/ImageUploader';
+import RectCoordinate from './types/RectCoordinate';
+
 
 function App() {
 
@@ -9,6 +10,11 @@ function App() {
   const path = 'https://localhost:7265/get';
 
   const [state, setState] = useState("");
+
+  const handleCoordinatesUpdated = (coordinate: RectCoordinate) => {
+    // 座標情報を受け取った後の処理を行う
+    console.log('Coordinates Updated:', coordinate);
+  };
 
   useEffect(() => {
     const get = async () => {
@@ -29,7 +35,7 @@ function App() {
   return (
     <div className="App">
       {state.toString()}
-      <ImageUploader />
+      <ImageUploader onCoordinatesUpdated={handleCoordinatesUpdated} />
     </div>
   );
 }
