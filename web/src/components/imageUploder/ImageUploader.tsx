@@ -92,6 +92,13 @@ const ImageUploader: React.FC = () => {
             onMouseUp={handleImageMouseUp}
           />
           {coordinate && <Canvas coordinate={coordinate} />}
+          {coordinate && 
+            <div className='coordinate-info'>
+              <span>Left: {coordinate.x}</span>
+              <span>Top: {coordinate.y}</span>
+              <span>Width: {coordinate.width}</span>
+              <span>Height: {coordinate.height}</span>
+            </div>}
         </div>
       )}
     </div>
