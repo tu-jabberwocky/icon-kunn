@@ -16,35 +16,6 @@ const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
   const startPositionRef = useRef({ x: 0, y: 0 });
   const isSelectingRef = useRef(false);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx.fillRect(
-          coordinate ? coordinate.x : 0,
-          coordinate ? coordinate.y : 0,
-          coordinate ? coordinate.width : 0,
-          coordinate ? coordinate.height : 0
-        );
-      }
-    }
-  }, [coordinate]);
-
-  useEffect(() => {
-    const image = new Image();
-    image.src = imageUrl;
-    image.onload = () => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        // canvas.width = image.width;
-        // canvas.height = image.height;
-      }
-    };
-  }, [imageUrl]);
-
   const handleImageMouseDown = (event: React.MouseEvent<HTMLImageElement>) => {
     const image = imageRef.current;
     if (image) {
@@ -82,12 +53,14 @@ const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
     isSelectingRef.current = false;
   };
 
-  const rectStyle = {
-    top: coordinate ? coordinate.y : 0,
-    left: coordinate ? coordinate.x : 0,
-    width: coordinate ? coordinate.width : 0,
-    height: coordinate ? coordinate.height : 0,
-  };
+  const rectStyle = coordinate
+    ? {
+        top: coordinate.y,
+        left: coordinate.x,
+        width: coordinate.width,
+        height: coordinate.height,
+      }
+    : {};
 
   return (
     <div className="image-container">
@@ -99,13 +72,7 @@ const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
         onMouseMove={handleImageMouseMove}
         onMouseUp={handleImageMouseUp}
       />
-      {coordinate && (
-        <canvas
-          ref={canvasRef}
-          style={rectStyle}
-          className="selection-overlay"
-        />
-      )}
+      <canvas ref={canvasRef} style={rectStyle} className="canvas" />
     </div>
   );
 };
