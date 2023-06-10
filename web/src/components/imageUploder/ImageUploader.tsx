@@ -12,7 +12,10 @@ interface CoordinateInfoProps {
   onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
 }
 
-const CoordinateInfo: React.FC<CoordinateInfoProps> = ({ coordinate, onCoordinatesUpdated }) => {
+const CoordinateInfo: React.FC<CoordinateInfoProps> = ({
+  coordinate,
+  onCoordinatesUpdated,
+}) => {
   const handleClick = () => {
     onCoordinatesUpdated(coordinate);
   };
@@ -32,7 +35,9 @@ interface ImageUploaderProps {
   onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ onCoordinatesUpdated }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({
+  onCoordinatesUpdated,
+}) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [coordinate, setCoordinate] = useState<RectCoordinate | null>(null);
@@ -120,8 +125,12 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onCoordinatesUpdated }) =
             onMouseMove={handleImageMouseMove}
             onMouseUp={handleImageMouseUp}
           />
+          {coordinate && <Canvas coordinate={coordinate} />}
           {coordinate && (
-            <CoordinateInfo coordinate={coordinate} onCoordinatesUpdated={handleCoordinatesUpdated} />
+            <CoordinateInfo
+              coordinate={coordinate}
+              onCoordinatesUpdated={handleCoordinatesUpdated}
+            />
           )}
         </div>
       )}

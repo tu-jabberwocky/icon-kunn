@@ -1,6 +1,6 @@
 import './canvas.css';
 
-import React, { useEffect,useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import RectCoordinate from '../../../types/RectCoordinate';
 
@@ -17,7 +17,6 @@ const Canvas: React.FC<CanvasProps> = ({ coordinate }) => {
       const ctx = canvas.getContext('2d');
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-       
       }
     }
   }, [coordinate]);
