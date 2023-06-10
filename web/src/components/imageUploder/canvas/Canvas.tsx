@@ -72,7 +72,9 @@ const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
         onMouseMove={handleImageMouseMove}
         onMouseUp={handleImageMouseUp}
       />
-      <canvas ref={canvasRef} style={rectStyle} className="canvas" />
+      {coordinate && (
+        <canvas ref={canvasRef} style={rectStyle} className="canvas" />
+      )}
     </div>
   );
 };
