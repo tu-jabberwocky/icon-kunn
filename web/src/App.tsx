@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import ImageUploader from './components/imageUploder/ImageUploader';
+import ImageUploader from './components/imageUploader/ImageUploader';
 import RectCoordinate from './types/RectCoordinate';
 
 function App() {

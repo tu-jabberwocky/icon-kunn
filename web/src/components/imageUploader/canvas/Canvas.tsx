@@ -1,6 +1,6 @@
 import './canvas.css';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 import RectCoordinate from '../../../types/RectCoordinate';
 
@@ -9,7 +9,10 @@ interface CanvasProps {
   onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
 }
 
-const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
+const Canvas: React.FC<CanvasProps> = (
+  { imageUrl, onCoordinatesUpdated },
+  ref
+) => {
   const [coordinate, setCoordinate] = useState<RectCoordinate | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -61,6 +64,45 @@ const Canvas: React.FC<CanvasProps> = ({ imageUrl, onCoordinatesUpdated }) => {
         height: coordinate.height,
       }
     : {};
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (coordinate) {
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+          ctx.fillRect(
+            coordinate.x,
+            coordinate.y,
+            coordinate.width,
+            coordinate.height
+          );
+        }
+      }
+    }
+  }, [coordinate]);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(image, 0, 0);
+        }
+      }
+    };
+  }, [imageUrl]);
+
+  useImperativeHandle(ref, () => ({
+    getCoordinate: () => coordinate,
+  }));
 
   return (
     <div className="image-container">

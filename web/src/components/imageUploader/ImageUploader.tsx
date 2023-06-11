@@ -1,11 +1,9 @@
 import './imageUploader.css';
-
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef, useState } from 'react';
-
 import RectCoordinate from '../../types/RectCoordinate';
-import Canvas from '../imageUploder/canvas/Canvas';
+import Canvas from '../imageUploader/canvas/Canvas';
 
 interface ImageUploaderProps {
   onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
