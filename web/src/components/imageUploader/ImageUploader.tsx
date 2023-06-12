@@ -32,24 +32,37 @@ function ImageUploader() {
     console.log('editPos:', editPos);
   };
 
+  const buttonEnabled = editPos ? false : true;
+
   return (
     <div>
-      <div className="file is-info">
-        <label className="file-label">
-          <input
-            className="file-input"
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          <span className="file-cta">
-            <span className="file-icon">
-              <FontAwesomeIcon icon={faUpload} />
+      <div className="columns">
+        <div className="column is-2 file is-info">
+          <label className="file-label">
+            <input
+              className="file-input"
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <span className="file-cta">
+              <span className="file-icon">
+                <FontAwesomeIcon icon={faUpload} />
+              </span>
+              <span className="file-label">Select File...</span>
             </span>
-            <span className="file-label">Select File...</span>
-          </span>
-        </label>
+          </label>
+        </div>
+        <div className="column is-2 post-boutton">
+          <button
+            className="button is-primary"
+            onClick={handleButtonClick}
+            disabled={buttonEnabled}
+          >
+            Get Image
+          </button>
+        </div>
       </div>
       {previewUrl && (
         <Canvas
@@ -57,7 +70,6 @@ function ImageUploader() {
           onCoordinatesUpdated={handleCoordinatesUpdated}
         />
       )}
-      <button onClick={handleButtonClick}>Get editPos</button>
     </div>
   );
 }
