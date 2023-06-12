@@ -1,8 +1,6 @@
-import './imageUploader.css';
-
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import RectCoordinate from '../../types/RectCoordinate';
 import Canvas from '../imageUploader/canvas/Canvas';
@@ -11,9 +9,9 @@ function ImageUploader() {
   const [base64fromImage, setBase64fromImage] = useState<string | null>(null);
   const [editPos, setEditPos] = useState<RectCoordinate | null>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         const base64string = reader.result as string;
@@ -31,7 +29,7 @@ function ImageUploader() {
     console.log('editPos:', editPos);
   };
 
-  const buttonEnabled = editPos ? false : true;
+  const buttonEnabled = !editPos;
 
   return (
     <div>
