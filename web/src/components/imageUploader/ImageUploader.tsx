@@ -4,21 +4,24 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ChangeEvent, useState } from 'react';
 
+import ApiClient from '../../api/api';
 import RectCoordinate from '../../types/RectCoordinate';
 import Canvas from '../imageUploader/canvas/Canvas';
 
 function ImageUploader() {
   const [base64fromImage, setBase64fromImage] = useState<string | null>(null);
   const [editPos, setEditPos] = useState<RectCoordinate | null>(null);
+  const apiUrl = 'https://localhost:7265';
+  const api = new ApiClient(apiUrl);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      ImageToBase64(file);
+      convertImageToBase64(file);
     }
   };
 
-  const ImageToBase64 = (file: File) => {
+  const convertImageToBase64 = (file: File) => {
     const reader = new FileReader();
     reader.onload = () => {
       const base64string = reader.result as string;
@@ -32,7 +35,19 @@ function ImageUploader() {
   };
 
   const handleButtonClick = () => {
-    console.log('editPos:', editPos);
+    if (editPos && base64fromImage) {
+      console.log('Selected Coordinates:', editPos);
+      console.log('Image Base64:', base64fromImage);
+
+      api
+        .get<string>('/get')
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const buttonEnabled = !editPos;
