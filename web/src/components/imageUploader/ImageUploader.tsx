@@ -14,13 +14,17 @@ function ImageUploader() {
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64string = reader.result as string;
-        setBase64fromImage(base64string);
-      };
-      reader.readAsDataURL(file);
+      ImageToBase64(file);
     }
+  };
+
+  const ImageToBase64 = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64string = reader.result as string;
+      setBase64fromImage(base64string);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleCoordinatesUpdated = (coordinate: RectCoordinate) => {
