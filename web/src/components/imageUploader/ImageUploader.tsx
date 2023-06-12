@@ -1,19 +1,16 @@
 import './imageUploader.css';
+
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+
 import RectCoordinate from '../../types/RectCoordinate';
 import Canvas from '../imageUploader/canvas/Canvas';
 
-interface ImageUploaderProps {
-  onCoordinatesUpdated: (coordinate: RectCoordinate) => void;
-}
-
-const ImageUploader: React.FC<ImageUploaderProps> = ({
-  onCoordinatesUpdated,
-}) => {
+function ImageUploader() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [editPos, setEditPos] = useState<RectCoordinate | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -25,6 +22,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleCoordinatesUpdated = (coordinate: RectCoordinate) => {
+    setEditPos(coordinate);
+  };
+
+  const handleButtonClick = () => {
+    console.log('editPos:', editPos);
   };
 
   return (
@@ -49,11 +54,12 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       {previewUrl && (
         <Canvas
           imageUrl={previewUrl}
-          onCoordinatesUpdated={onCoordinatesUpdated}
+          onCoordinatesUpdated={handleCoordinatesUpdated}
         />
       )}
+      <button onClick={handleButtonClick}>Get editPos</button>
     </div>
   );
-};
+}
 
 export default ImageUploader;
