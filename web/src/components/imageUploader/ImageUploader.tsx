@@ -1,3 +1,5 @@
+import './imageUploader.css';
+
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ChangeEvent, useState } from 'react';
@@ -51,7 +53,7 @@ function ImageUploader() {
             </span>
           </label>
         </div>
-        <div className="column is-2 post-boutton">
+        <div className="column is-2 button-container">
           <button
             className="button is-primary"
             onClick={handleButtonClick}
