@@ -1,13 +1,18 @@
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var corsPolicy = "corsPolicy";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureHttpJsonOptions(options => {
+    options.SerializerOptions.WriteIndented = true;
+    options.SerializerOptions.IncludeFields = true;
+});
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy(name: corsPolicy,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000",
+                          policy.WithOrigins("http://localhost:4000",
                                               "http://localhost:7265");
                       });
 });
@@ -28,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(corsPolicy);
 
 app.UseHttpsRedirection();
 
@@ -36,12 +41,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/get", async context =>
+app.MapGet("/get", () =>
 {
-    //string param = (string)context.GetRouteValue()
-    var response = new ResponseModel();
-    response.value = "test";
-    await context.Response.WriteAsJsonAsync(response);
+    return TypedResults.Ok(new ResponseModel { Success = true,
+                                               Value = "‚±‚ñ‚É‚¿‚Í"
+                                               }); ;
 });
 
 app.Run();
