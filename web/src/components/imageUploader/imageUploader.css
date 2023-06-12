@@ -1,0 +1,19 @@
+.image-container {
+  position: relative;
+}
+
+.image-container {
+  margin: 5%;
+}
+
+.image-container img {
+  -webkit-user-drag: none;
+}
+
+.file {
+  margin: 5%;
+}
+
+.button-container {
+  margin: 5%;
+}

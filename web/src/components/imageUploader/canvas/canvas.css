@@ -1,0 +1,12 @@
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px dotted black;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.image-container {
+  position: relative;
+}
