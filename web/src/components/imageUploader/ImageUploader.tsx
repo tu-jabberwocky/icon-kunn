@@ -8,17 +8,16 @@ import RectCoordinate from '../../types/RectCoordinate';
 import Canvas from '../imageUploader/canvas/Canvas';
 
 function ImageUploader() {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [base64fromImage, setBase64fromImage] = useState<string | null>(null);
   const [editPos, setEditPos] = useState<RectCoordinate | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      setSelectedImage(file);
       const reader = new FileReader();
       reader.onload = () => {
-        setPreviewUrl(reader.result as string);
+        const base64string = reader.result as string;
+        setBase64fromImage(base64string);
       };
       reader.readAsDataURL(file);
     }
@@ -64,9 +63,9 @@ function ImageUploader() {
           </button>
         </div>
       </div>
-      {previewUrl && (
+      {base64fromImage && (
         <Canvas
-          imageUrl={previewUrl}
+          imageUrl={base64fromImage}
           onCoordinatesUpdated={handleCoordinatesUpdated}
         />
       )}
